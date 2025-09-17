@@ -1,0 +1,56 @@
+
+   .form-control-dark {
+  border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle:not(:focus) {
+  outline: 0;
+}
+
+  .vantagens {
+   background-color: #0e1b3b;
+padding: 80px 20px;
+   text-align: center;
+  }
+  .vantagens h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+  .vantagens p {
+    color: #cbd5e1;
+    margin-bottom: 40px;
+  }
+  .vantagens-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  .card {
+    background: #142850;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .card h3 {
+    color: white;
+    margin-bottom: 10px;
+  }
+  .card p {
+    color: #cbd5e1;
+    margin-bottom: 10px;
+  }
+  .card ul {
+    padding-left: 20px;
+    color: #38bdf8;
+  }

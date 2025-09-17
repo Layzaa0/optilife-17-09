@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Perfil</title>
+  <link rel="stylesheet" href="editperfil.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+
+    .navbar-brand img {
+  height: 90px; /* você pode ajustar para 40px, 50px, etc */
+}
+
+    .navbar {
+      background-color: hsl(225, 100%, 14%);
+      border-bottom: 1px solid #3a3b3e;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+
+    .nav-link {
+      color: #ccc !important;
+      margin-right: 1rem;
+    }
+
+    .nav-link.active {
+      color: white !important;
+     
+    }
+
+    .form-control {
+      background-color: #2b2d30;
+      color: white;
+      border: none;
+    }
+
+    .rodape {
+      background-color: #3a3b3e;
+    }
+
+    .form-control::placeholder {
+      color: #bbb;
+    }
+
+    .avatar-btn {
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .dropdown-menu {
+      background-color: #2b2d30;
+      border: none;
+    }
+
+    .dropdown-item {
+      color: #fff;
+    }
+
+    .dropdown-item:hover {
+      background-color: #3a3b3e;
+    }
+
+     .spacer {
+      height: 150px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    .card, .card-perfil {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* PERFIL */
+    .card-perfil {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .card-perfil img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #007bff;
+    }
+    .btn-upload {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-upload:hover {
+      background: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+    .edit-btn {
+      margin-left: 10px;
+      padding: 5px 10px;
+      font-size: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #ffc107;
+      cursor: pointer;
+    }
+    .edit-btn:hover {
+      background: #e0a800;
+    }
+
+    /* LOCAIS */
+    .local {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .status.on { color: green; font-weight: bold; }
+    .status.off { color: red; font-weight: bold; }
+    .local-actions button {
+      margin-left: 8px;
+      padding: 5px 8px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .local-actions .edit {
+      background: #007bff;
+      color: white;
+    }
+    .local-actions .toggle {
+      background: #28a745;
+      color: white;
+    }
+    .local-actions button:hover {
+      opacity: 0.9;
+    }
+
+    /* ESTATÍSTICAS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .stat-box {
+      background: #f9fafc;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+    .stat-box h4 {
+      margin: 10px 0 0;
+      font-size: 20px;
+      color: #007bff;
+    }
+
+    /* HISTÓRICO */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table thead {
+      background: #007bff;
+      color: white;
+    }
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .status-badge.ok {
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+.footer {
+  text-align: center;
+  background: #0a2d5d;
+  color: white;
+  padding: 20px;
+  font-size: 14px;
+  width: 100%;   /* ocupa toda a largura */
+  position: relative; /* segue o fluxo da página */
+  left: 30px;
+  right: 30px;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+    <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  
+
+  <!-- Cabeçalho -->
+   <header class="meu-header">
+  <nav class="navbar navbar-expand-lg px-4 py-3 fixed-top">
+   <a class="navbar-brand me-3" href="#">
+  <img src="2.png" alt="Logo OptiLife" height="35">
+</a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="principal.html">início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="relatorios.html">Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sobre o site</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="formaspag.html">Plano</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Lumi</a>
+        </li>
+      </ul>
+      <form class="d-flex align-items-center me-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Pesquise..." aria-label="Search" />
+        
+      </form>
+
+      <!-- Dropdown com foto de perfil -->
+      <!-- Dropdown com foto de perfil -->
+<div class="dropdown">
+  <button class="avatar-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="https://i.pravatar.cc/300" alt="Avatar" class="avatar" />
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="editperfil.html">Editar Perfil</a></li>
+    <li><a class="dropdown-item" href="index.html">Sair</a></li>
+  </ul>
+</div>
+</header>
+
+<div class="spacer"></div>
+  
+  <div class="container">
+
+    <!-- PERFIL -->
+    <div class="card-perfil">
+      <img id="profile-img" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Avatar">
+      <div>
+        <h2 id="nome">PERFIL <button class="edit-btn" onclick="editarNome()">Editar</button></h2>
+        <p id="localizacao">Recife, PE <button class="edit-btn" onclick="editarLocalizacao()">Editar</button></p>
+        <div class="verificado" id="status-verificado">Conta verificada</div>
+        <p id="membro-desde">Membro desde: 01/2023</p>
+        <label for="upload-foto" class="btn-upload">Mudar Foto</label>
+        <input type="file" id="upload-foto" class="hidden">
+      </div>
+    </div>
+
+    <!-- LOCAIS -->
+    <div class="card">
+      <h3>Minhas Localizações</h3>
+      <div id="locais">
+        <div class="local">
+          <div>
+            <strong>Casa</strong><br>
+            <small>Boa Viagem, Recife</small>
+          </div>
+          <div>
+            <span class="status on">⚡ Com energia</span>
+            <div class="local-actions">
+              <button class="edit" onclick="editarLocal(this)">Editar</button>
+              <button class="toggle" onclick="toggleEnergia(this)">Alternar</button>
+            </div>
+          </div>
+        </div>
+        <div class="local">
+          <div>
+            <strong>Trabalho</strong><br>
+            <small>Boa Vista, Recife</small>
+          </div>
+          <div>
+            <span class="status off">⚡ Sem energia</span>
+            <div class="local-actions">
+              <button class="edit" onclick="editarLocal(this)">Editar</button>
+              <button class="toggle" onclick="toggleEnergia(this)">Alternar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-upload" id="btn-add">+ Adicionar Local</button>
+    </div>
+
+    <!-- ESTATÍSTICAS -->
+    <div class="card">
+      <h3>Minhas Estatísticas</h3>
+      <div class="stats">
+        <div class="stat-box">
+          <span>Tempo sem energia</span>
+          <h4 id="tempo-sem">14h30min</h4>
+        </div>
+        <div class="stat-box">
+          <span>Quedas registradas</span>
+          <h4 id="quedas">5</h4>
+        </div>
+        <div class="stat-box">
+          <span>Tempo médio</span>
+          <h4 id="tempo-medio">2h54min</h4>
+        </div>
+        <div class="stat-box">
+          <span>Local mais afetado</span>
+          <h4 id="mais-afetado">Boa Viagem</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="card">
+      <h3>Histórico Recente</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Duração</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="historico">
+          <tr>
+            <td>Casa</td>
+            <td>10/08/2023 14:30</td>
+            <td>2h15min</td>
+            <td><span class="status-badge ok">Resolvido</span></td>
+          </tr>
+          <tr>
+            <td>Trabalho</td>
+            <td>08/08/2023 09:45</td>
+            <td>4h30min</td>
+            <td><span class="status-badge ok">Resolvido</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <script>
+    // Trocar foto de perfil
+    document.getElementById("upload-foto").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById("profile-img").src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Editar Nome
+    function editarNome(){
+      const nome = prompt("Digite o novo nome:");
+      if(nome) document.getElementById("nome").firstChild.textContent = nome + " ";
+    }
+
+    // Editar Localização
+    function editarLocalizacao(){
+      const loc = prompt("Digite a nova localização:");
+      if(loc) document.getElementById("localizacao").firstChild.textContent = loc + " ";
+    }
+
+    // Adicionar novo local
+    document.getElementById("btn-add").addEventListener("click", () => {
+      const nome = prompt("Nome do local:");
+      const endereco = prompt("Endereço do local:");
+      if(nome && endereco){
+        const div = document.createElement("div");
+        div.classList.add("local");
+        div.innerHTML = `
+          <div>
+            <strong>${nome}</strong><br>
+            <small>${endereco}</small>
+          </div>
+          <div>
+            <span class="status on">⚡ Com energia</span>
+            <div class="local-actions">
+              <button class="edit" onclick="editarLocal(this)">Editar</button>
+              <button class="toggle" onclick="toggleEnergia(this)">Alternar</button>
+            </div>
+          </div>
+        `;
+        document.getElementById("locais").appendChild(div);
+      }
+    });
+
+    // Editar local
+    function editarLocal(btn){
+      const localDiv = btn.closest(".local");
+      const nome = prompt("Novo nome:", localDiv.querySelector("strong").textContent);
+      const endereco = prompt("Novo endereço:", localDiv.querySelector("small").textContent);
+      if(nome) localDiv.querySelector("strong").textContent = nome;
+      if(endereco) localDiv.querySelector("small").textContent = endereco;
+    }
+
+    // Alternar energia
+    function toggleEnergia(btn){
+      const status = btn.closest(".local").querySelector(".status");
+      if(status.classList.contains("on")){
+        status.classList.remove("on");
+        status.classList.add("off");
+        status.textContent = "⚡ Sem energia";
+      } else {
+        status.classList.remove("off");
+        status.classList.add("on");
+        status.textContent = "⚡ Com energia";
+      }
+    }
+  </script>
+
+<!-- Rodapé -->  
+  <footer class="footer">
+    <p>© 2025 OptiLife Economy. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

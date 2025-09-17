@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.left {
+  flex: 1;
+  
+  background: #fff;
+  padding: 50px;
+  position: relative;
+}
+
+.left h1 {
+  color: #0b2c5a;
+  font-size: 40px;
+  position: relative;
+  right: -20px;
+}
+
+.left h1 span {
+  font-weight: bold;
+}
+
+.left p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+  max-width: 350px;
+}
+
+form {
+  margin-top: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #0b2c5a;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.flex {
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0b2c5a;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0a244a;
+}
+
+.right {
+  flex: 1;
+  background: #0b2c5a;
+  color: white;
+  padding: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lamp {
+  max-width: 250px;
+  margin-bottom: 5px;
+  width: 170px;
+  height: 170px;
+}
+
+.price {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* Lista de benefícios com linha conectando os pontos */
+.benefits {
+  list-style: none;
+  padding-left: 35px;
+  position: relative;
+}
+
+.benefits::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 5px;
+  height: calc(100% - 10px);
+  width: 2px;
+  background-color: white;
+  opacity: 0.5;
+}
+
+.benefits li {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.benefits li::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Detalhe ciano no canto inferior direito */
+
+
+/* Detalhe ciano no canto superior esquerdo */

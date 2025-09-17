@@ -1,0 +1,15 @@
+drop database cadastro; 
+create database cadastro;
+use cadastro;
+
+
+CREATE TABLE usuarios (  
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,  
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,  
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR (20) NOT NULL
+);  
+
+insert into usuarios(nome, email, senha, telefone) values('Layza', 'layza@gmail.com', '1234', '0000000-0000000');
+select*from usuarios;

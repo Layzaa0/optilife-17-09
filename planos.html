@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico Lumi</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a1b3f;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4dd0ff;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    canvas {
+      background: #142a5c;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #142a5c;
+      margin-top: 15px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table th, table td {
+      border: 1px solid #1e3d7a;
+      padding: 10px;
+      text-align: center;
+    }
+    table th {
+      background: #1e3d7a;
+      color: #4dd0ff;
+    }
+    .botoes {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .botoes button {
+      background: #4dd0ff;
+      color: #0a1b3f;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .botoes button:hover {
+      background: #00aaff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Histórico de Economia Mensal</h1>
+
+
+    <!-- Gráfico -->
+    <canvas id="grafico"></canvas>
+
+
+    <!-- Tabela -->
+    <table id="tabela">
+      <thead>
+        <tr>
+          <th>Mês</th>
+          <th>Economia (R$)</th>
+          <th>Economia (kWh)</th>
+          <th>Economia (Litros de Água)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Janeiro</td><td>45,00</td><td>30</td><td>120</td></tr>
+        <tr><td>Fevereiro</td><td>38,50</td><td>25</td><td>95</td></tr>
+        <tr><td>Março</td><td>50,20</td><td>35</td><td>140</td></tr>
+        <tr><td>Abril</td><td>42,00</td><td>28</td><td>110</td></tr>
+        <tr><td>Maio</td><td>47,80</td><td>32</td><td>130</td></tr>
+      </tbody>
+    </table>
+
+
+    <!-- Botões -->
+    <div class="botoes">
+      <button onclick="exportarPDF()">📄 Exportar PDF</button>
+      <button onclick="exportarExcel()">📊 Exportar Excel</button>
+    </div>
+  </div>
+
+
+  <script>
+    // === Gráfico ===
+    const ctx = document.getElementById('grafico').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+        datasets: [{
+          label: 'Economia (R$)',
+          data: [45, 38.5, 50.2, 42, 47.8],
+          borderColor: '#4dd0ff',
+          backgroundColor: 'rgba(77,208,255,0.3)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: "#fff" } } },
+        scales: {
+          x: { ticks: { color: "#fff" } },
+          y: { ticks: { color: "#fff" } }
+        }
+      }
+    });
+
+
+    // === Exportar PDF ===
+    function exportarPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text("Relatório de Economia - Lumi", 20, 20);
+      let y = 40;
+      const linhas = document.querySelectorAll("#tabela tbody tr");
+      linhas.forEach((linha, i) => {
+        doc.text(linha.innerText, 20, y + (i * 10));
+      });
+      doc.save("relatorio_lumi.pdf");
+    }
+
+
+    // === Exportar Excel ===
+    function exportarExcel() {
+      const tabela = document.getElementById("tabela");
+      const wb = XLSX.utils.table_to_book(tabela, { sheet: "Relatório" });
+      XLSX.writeFile(wb, "relatorio_lumi.xlsx");
+    }
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,16 @@
+  <?php
+  $contador = 1;
+  while($row = mysqli_fetch_assoc($result)) { ?>
+    <tr>
+      <td><?php echo $contador++; ?></td> <!-- Mostra 1, 2, 3... -->
+      <td><?php echo $row['nome']; ?></td>
+      <td><?php echo $row['email']; ?></td>
+      <td><?php echo $row['senha']; ?></td>
+      <td><?php echo $row['telefone']; ?></td>
+      <td>
+        <a class="btn editar" href="editar_cadastro.php?id=<?php echo $row['id_usuario']; ?>">Editar</a>
+        <a class="btn deletar" href="deletar.php?id=<?php echo $row['id_usuario']; ?>" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</a>
+      </td>
+    </tr>
+  <?php } ?>
+</table>
